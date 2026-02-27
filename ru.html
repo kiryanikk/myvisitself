@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>myvisitself — portfolio</title>
+  <meta name="description" content="Никита — Python-разработчик (Telegram-боты, скрипты), MTA game dev и сайты." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-theme="dark" data-lang="ru">
+  <a class="skip" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar__inner">
+      <!-- brand removed by request -->
+
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__link" href="#/work" data-route="work" data-i18n="nav.work">Work</a>
+        <a class="nav__link" href="#/play" data-route="play" data-i18n="nav.play">Play</a>
+        <a class="nav__link" href="#/info" data-route="info" data-i18n="nav.info">Info</a>
+        <a class="nav__link" href="#/connect" data-route="connect" data-i18n="nav.connect">Connect</a>
+        <span class="nav__status" title="Availability" aria-label="Availability">
+          <span class="dot"></span>
+          <span data-i18n="nav.available">Available</span>: <strong data-i18n="nav.yep">Yep</strong>
+        </span>
+      </nav>
+
+      <div class="controls" aria-label="Controls">
+        <button class="iconbtn iconbtn--burger" id="menuBtn" aria-label="Menu" aria-expanded="false" title="Menu">
+          <span class="iconbtn__icon">☰</span>
+        </button>
+        <div class="seg" role="group" aria-label="Language">
+          <button class="seg__btn" data-set-lang="ru" aria-pressed="false">RU</button>
+          <button class="seg__btn" data-set-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="iconbtn" id="themeBtn" aria-label="Toggle theme" title="Theme">
+          <span class="iconbtn__icon">☾</span>
+        </button>
+        <button class="iconbtn" id="fxBtn" aria-label="Toggle effects" title="Effects">
+          <span class="iconbtn__icon">FX</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile drawer menu (shown on small screens) -->
+    <div class="mnav" id="mobileMenu" aria-hidden="true">
+      <a class="mnav__link" href="#/work" data-route="work" data-i18n="nav.work">Работа</a>
+      <a class="mnav__link" href="#/play" data-route="play" data-i18n="nav.play">Игра</a>
+      <a class="mnav__link" href="#/info" data-route="info" data-i18n="nav.info">Обо мне</a>
+      <a class="mnav__link" href="#/connect" data-route="connect" data-i18n="nav.connect">Контакты</a>
+      <div class="mnav__status">
+        <span class="dot"></span>
+        <span data-i18n="nav.available">Доступен</span>: <strong data-i18n="nav.yep">Да</strong>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <section class="hero">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <div class="kicker" data-i18n="hero.kicker">PYTHON DEVELOPER • TELEGRAM BOTS • SCRIPTS</div>
+          <h1 class="hero__title">
+            <span data-i18n="hero.hi">Привет, я</span> <span class="accent" data-i18n="hero.name">Никита</span>
+          </h1>
+          <p class="hero__subtitle" data-i18n="hero.sub">
+            I'm 21. I build Telegram bots, automate stuff with Python, make small websites, and sometimes ship game systems for MTA.
+          </p>
+
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#/work" data-route="work" data-i18n="hero.btnOpen">Open section</a>
+            <a class="btn btn--ghost" href="#content" data-i18n="hero.btnScroll">Scroll mode</a>
+          </div>
+
+          <div class="hintrow">
+            <span class="hint" data-i18n="hero.hint">
+              Tip: use ← → (or scroll) to select. Press Enter to open. Esc to close.
+            </span>
+          </div>
+        </div>
+
+        <div class="hero__scene" aria-label="Interactive navigation">
+          <div class="scene" id="scene">
+            <div class="scene__bg" aria-hidden="true"></div>
+
+            <!-- 3D cube navigation (no extra buttons/cards) -->
+            <div class="cubenav" id="cubenav" aria-label="Cube navigation">
+              <div class="cube" id="cube" role="listbox" aria-label="Sections">
+                <div class="cube__wire" aria-hidden="true">
+                  <span class="cube__wireface wf-front"></span>
+                  <span class="cube__wireface wf-back"></span>
+                  <span class="cube__wireface wf-right"></span>
+                  <span class="cube__wireface wf-left"></span>
+                  <span class="cube__wireface wf-top"></span>
+                  <span class="cube__wireface wf-bottom"></span>
+                </div>
+                <button class="cubeface cf-front" role="option" data-section="work" aria-selected="true">
+                  <span class="cubeface__label">work</span>
+                </button>
+                <button class="cubeface cf-right" role="option" data-section="play" aria-selected="false">
+                  <span class="cubeface__label">play</span>
+                </button>
+                <button class="cubeface cf-back" role="option" data-section="info" aria-selected="false">
+                  <span class="cubeface__label">info</span>
+                </button>
+                <button class="cubeface cf-left" role="option" data-section="connect" aria-selected="false">
+                  <span class="cubeface__label">connect</span>
+                </button>
+              </div>
+              <div class="cubehint" aria-hidden="true">
+                <span class="cubehint__k">drag</span><span class="cubehint__d">to rotate</span>
+              </div>
+            </div>
+
+            <div class="scene__hud" aria-hidden="true">
+              <span class="hud__item" id="hudRoute">#/work</span>
+              <span class="hud__item" data-i18n="hud.pressEnter">press Enter</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content-first (better UX): readable sections for scroll & SEO -->
+    <section id="content" class="content">
+      <section class="block" id="work" data-section-block="work">
+        <div class="block__head">
+          <h2 class="block__title" data-i18n="sections.work.title">Work</h2>
+          <p class="block__lead" data-i18n="sections.work.lead">Practical Python for business needs.</p>
+        </div>
+
+        <div class="block__subhead">
+          <h3 class="block__subtitle" data-i18n="sections.work.projects.title">Проекты</h3>
+          <p class="block__note" data-i18n="sections.work.projects.lead">Пара лайв‑демо + архивы с исходниками.</p>
+        </div>
+
+        <div class="grid grid--2">
+          <article class="tile">
+            <h3 data-i18n="projects.couples.title">Couples (мини‑сайт)</h3>
+            <p data-i18n="projects.couples.desc">Небольшая интерактивная страница — превью прямо на сайте.</p>
+            <div class="btnrow">
+              <a class="btn btn--ghost" href="https://kiryanikk.github.io/Couples/" target="_blank" rel="noopener" data-i18n="projects.open">Открыть</a>
+              <button class="btn btn--ghost" type="button" data-preview-url="https://kiryanikk.github.io/Couples/" data-title="Couples" data-i18n="projects.preview">Превью</button>
+            </div>
+          </article>
+
+          <article class="tile">
+            <h3 data-i18n="projects.altay.title">Visit Altay (лендинг)</h3>
+            <p data-i18n="projects.altay.desc">Адаптивный лендинг со секциями и аккуратной вёрсткой.</p>
+            <div class="btnrow">
+              <a class="btn btn--ghost" href="https://kiryanikk.github.io/Visit-About-Altay/russian.html" target="_blank" rel="noopener" data-i18n="projects.open">Открыть</a>
+              <button class="btn btn--ghost" type="button" data-preview-url="https://kiryanikk.github.io/Visit-About-Altay/russian.html" data-title="Visit Altay" data-i18n="projects.preview">Превью</button>
+            </div>
+          </article>
+
+          <article class="tile tile--full">
+            <h3 data-i18n="projects.tgbot.title">Zasidelis Adapt Bot</h3>
+            <p data-i18n="projects.tgbot.desc">Публичный Telegram‑бот — открой и протестируй сценарий.</p>
+            <div class="btnrow">
+              <a class="btn btn--ghost" href="https://t.me/ZasidelisAdapt_bot" target="_blank" rel="noopener" data-i18n="projects.openBot">Открыть в Telegram</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      
+      <section class="block" id="play" data-section-block="play">
+        <div class="block__head">
+          <h2 class="block__title" data-i18n="sections.play.title">Play</h2>
+          <p class="block__lead" data-i18n="sections.play.lead">Game systems & experiments.</p>
+        </div>
+
+        <div class="grid">
+          <article class="tile">
+            <h3 data-i18n="sections.play.mta.title">MTA development</h3>
+            <p data-i18n="sections.play.mta.desc">
+              Gameplay logic, economy, UI, events, anti-abuse scripts, serverside utilities.
+            </p>
+          </article>
+
+          <article class="tile tile--wide">
+            <h3 data-i18n="sections.play.demo.title">Mini demo (mouse)</h3>
+            <p data-i18n="sections.play.demo.desc">
+              A tiny interactive widget — just to make the page feel alive.
+            </p>
+
+            <canvas class="miniCanvas" data-mini width="520" height="180" aria-label="Mini demo canvas"></canvas>
+          </article>
+        </div>
+      </section>
+
+      <section class="block" id="info" data-section-block="info">
+        <div class="block__head">
+          <h2 class="block__title" data-i18n="sections.info.title">Info</h2>
+          <p class="block__lead" data-i18n="sections.info.lead">Short and straight to the point.</p>
+        </div>
+
+        <div class="grid">
+          <article class="tile tile--wide abouttile">
+            <div class="abouttile__media" aria-hidden="true">
+              <div class="photoframe" role="presentation">
+                <img class="photoframe__img" src="assets/nikita.jpg" alt="" />
+                <div class="photoframe__shine"></div>
+                <div class="photoframe__badge"><span class="brand__mark">N</span></div>
+              </div>
+            </div>
+            <div class="abouttile__text">
+              <h3 data-i18n="sections.info.about.title">About me</h3>
+              <p data-i18n="sections.info.about.desc">21 y.o. Developer. I like clean UX, fast sites, and automation that saves time.</p>
+              <ul class="minilist">
+                <li><span class="dot"></span><span data-i18n="abouttile.b1">Fast communication</span></li>
+                <li><span class="dot"></span><span data-i18n="abouttile.b2">Clean handoff</span></li>
+                <li><span class="dot"></span><span data-i18n="abouttile.b3">Practical solutions</span></li>
+              </ul>
+            </div>
+          </article>
+          <article class="tile">
+            <h3 data-i18n="sections.info.stack.title">Stack</h3>
+            <ul class="list">
+              <li>Python • aiogram • FastAPI</li>
+              <li>PostgreSQL/MySQL • Redis</li>
+              <li>Docker • Linux • CI basics</li>
+              <li>HTML/CSS/JS • responsive UI</li>
+              <li>Lua • MTA scripting</li>
+            </ul>
+          </article>
+          <article class="tile">
+            <h3 data-i18n="sections.info.values.title">How I work</h3>
+            <ul class="list">
+              <li data-i18n="sections.info.values.v1">Quick MVP → iterations</li>
+              <li data-i18n="sections.info.values.v2">Readable code & logs</li>
+              <li data-i18n="sections.info.values.v3">Deployment & handoff docs</li>
+            </ul>
+          </article>
+
+          <article class="tile">
+            <h3 data-i18n="sections.info.toolbox.title">Toolbox</h3>
+            <p class="note" data-i18n="sections.info.toolbox.desc">Small interactive settings saved in your browser.</p>
+            <div class="toolrow">
+              <label class="toollabel" for="accentRange" data-i18n="toolbox.accent">Accent color</label>
+              <input id="accentRange" data-accent-range class="range" type="range" min="0" max="360" value="206" />
+            </div>
+            <div class="toolrow">
+              <label class="toollabel" for="motionToggle" data-i18n="toolbox.motion">Reduced motion</label>
+              <button class="btn btn--ghost" id="motionToggle" data-motion-toggle type="button" data-i18n="toolbox.motionBtn">Toggle</button>
+            </div>
+            <div class="toolrow">
+              <label class="toollabel" for="soundToggle" data-i18n="toolbox.sound">Sound</label>
+              <button class="btn btn--ghost" id="soundToggle" data-sound-toggle type="button" data-i18n="toolbox.soundBtn">Toggle</button>
+            </div>
+            <p class="hint" data-i18n="toolbox.hint">Tip: press Ctrl+K to open the command palette.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="block" id="connect" data-section-block="connect">
+        <div class="block__head">
+          <h2 class="block__title" data-i18n="sections.connect.title">Connect</h2>
+          <p class="block__lead" data-i18n="sections.connect.lead">Let’s talk about your idea.</p>
+        </div>
+
+        <div class="grid">
+          <article class="tile tile--wide tile--full">
+            <h3 data-i18n="sections.connect.form.title">Message me</h3>
+            <p class="note" data-i18n="sections.connect.form.desc">This form works on static hosting via a form provider.</p>
+            <form class="form" id="contactForm" method="POST" action="https://formspree.io/f/XXXXXXXX">
+              <div class="form__row">
+                <label class="form__label" for="cfName" data-i18n="form.name">Name</label>
+                <input class="form__input" id="cfName" name="name" autocomplete="name" required />
+              </div>
+              <div class="form__row">
+                <label class="form__label" for="cfEmail" data-i18n="form.email">Email</label>
+                <input class="form__input" id="cfEmail" name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="form__row">
+                <label class="form__label" for="cfMsg" data-i18n="form.msg">Message</label>
+                <textarea class="form__input form__input--area" id="cfMsg" name="message" rows="5" required></textarea>
+              </div>
+              <div class="form__actions">
+                <button class="btn btn--primary" type="submit" data-i18n="form.send">Send</button>
+                <span class="form__status" id="formStatus" aria-live="polite"></span>
+              </div>
+            </form>
+            <p class="note" data-i18n="sections.connect.form.tip">Replace XXXXXXXX with your Formspree form id (instructions in README).</p>
+          </article>
+        </div>
+      </section>
+      <footer class="footer">
+        <div class="footer__left">
+          <div class="footer__meta">
+            <span>© <span id="year"></span> Nikita</span>
+            <span class="sep">•</span>
+            <span class="muted" data-i18n="footer.made">By kirya for you ♡</span>
+          </div>
+
+          <div class="footer__payrow" aria-label="Payment methods">
+            <div class="footer__payicons" aria-label="Payment icons">
+              <span class="paybadge"><img src="assets/icons/pay/visa.png" alt="Visa" loading="lazy"></span>
+              <span class="paybadge"><img src="assets/icons/pay/mastercard.png" alt="Mastercard" loading="lazy"></span>
+              <span class="paybadge"><img src="assets/icons/pay/amex.png" alt="American Express" loading="lazy"></span>
+              <span class="paybadge"><img src="assets/icons/pay/mir.png" alt="MIR" loading="lazy"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer__right">
+          <div class="footer__social" aria-label="Social links">
+            <a class="footer__icon" href="https://t.me/kiryanikkk" target="_blank" rel="noopener" aria-label="Telegram"><img src="assets/icons/telegram.png" alt=""></a>
+            <a class="footer__icon" href="https://github.com/kiryanikk" target="_blank" rel="noopener" aria-label="GitHub"><img src="assets/icons/github.png" alt=""></a>
+            <a class="footer__icon" href="mailto:kirillov.nik1t@yandex.com" aria-label="Email"><img src="assets/icons/email.png" alt=""></a>
+            <a class="footer__icon" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><img src="assets/icons/instagram.png" alt=""></a>
+          </div>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Game-like overlay (optional): opens via #/work etc -->
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="overlay__chrome">
+      <button class="iconbtn iconbtn--ghost" id="ovBack" title="Back" aria-label="Back">←</button>
+      <div class="crumbs" aria-label="Breadcrumbs">
+        <button class="crumb" data-ov-go="work">work</button>
+        <button class="crumb" data-ov-go="play">play</button>
+        <button class="crumb" data-ov-go="info">info</button>
+        <button class="crumb" data-ov-go="connect">connect</button>
+      </div>
+      <div class="overlay__actions">
+        <button class="iconbtn iconbtn--ghost" id="ovPrev" title="Previous" aria-label="Previous">‹</button>
+        <button class="iconbtn iconbtn--ghost" id="ovNext" title="Next" aria-label="Next">›</button>
+        <button class="iconbtn iconbtn--ghost" id="ovClose" title="Close" aria-label="Close">×</button>
+      </div>
+    </div>
+    <div class="overlay__panel" role="dialog" aria-modal="true" aria-label="Section">
+      <div class="overlay__title" id="ovTitle"></div>
+      <div class="overlay__body" id="ovBody"></div>
+    </div>
+    <div class="glitch" aria-hidden="true"></div>
+  </div>
+  <script src="js/app.js" defer></script>
+
+  <!-- Command palette + project preview modal -->
+  <div class="modal" id="palette" aria-hidden="true">
+    <div class="modal__card" role="dialog" aria-modal="true" aria-label="Command palette">
+      <div class="modal__head">
+        <div class="modal__title" data-i18n="palette.title">Command palette</div>
+        <button class="iconbtn iconbtn--ghost" id="paletteClose" aria-label="Close">×</button>
+      </div>
+      <input class="modal__search" id="paletteSearch" placeholder="Type to search…" />
+      <div class="modal__list" id="paletteList"></div>
+      <div class="modal__foot" data-i18n="palette.hint">Enter — run • Esc — close</div>
+    </div>
+  </div>
+
+  <div class="modal" id="preview" aria-hidden="true">
+    <div class="modal__card modal__card--wide" role="dialog" aria-modal="true" aria-label="Preview">
+      <div class="modal__head">
+        <div class="modal__title" id="previewTitle">Preview</div>
+        <button class="iconbtn iconbtn--ghost" id="previewClose" aria-label="Close">×</button>
+      </div>
+      <iframe class="modal__frame" id="previewFrame" title="Project preview" loading="lazy"></iframe>
+      <div class="modal__foot">
+        <a class="link" id="previewOpen" href="#" target="_blank" rel="noopener" data-i18n="projects.open">Open live</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
