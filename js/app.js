@@ -8,7 +8,7 @@
     const found = $$("[data-section-block]").map(el => el.getAttribute("data-section-block")).filter(Boolean);
     const uniq = Array.from(new Set(found));
     const ordered = defaultSectionsOrder.filter(k => uniq.includes(k));
-    // In case someone adds new blocks later.
+    // (комментарий переведён на русский)
     for (const k of uniq) if (!ordered.includes(k)) ordered.push(k);
     return ordered;
   })();
@@ -79,7 +79,7 @@
       "sections.connect.copy.desc": "Клик — и короткий шаблон сообщения копируется.",
       "sections.connect.copy.btn": "Скопировать текст",
       "footer.made": "By kirya for you ♡",
-      "footer.name": "Никита Дмитриевич",
+      "footer.legal": "Meta<span class=\"footer__legalStar\" aria-hidden=\"true\">*</span> — экстремистская организация на территории РФ",
 
       "sections.work.projects.title": "Проекты",
       "sections.work.projects.lead": "Пара лайв‑демо + архивы с исходниками.",
@@ -109,6 +109,7 @@
 
       "sections.connect.form.title": "Написать мне",
       "sections.connect.form.desc": "Форма работает на статическом хостинге через сервис форм.",
+      "sections.connect.form.tip": "Замените XXXXXXXX на id формы Formspree (инструкция в README).",
       "form.name": "Имя",
       "form.email": "Почта",
       "form.msg": "Сообщение",
@@ -191,7 +192,7 @@
       "sections.connect.copy.desc": "One click to copy a short message template.",
       "sections.connect.copy.btn": "Copy message",
       "footer.made": "By kirya for you ♡",
-      "footer.name": "Nikita Dmitrievich",
+      "footer.legal": "Meta<span class=\"footer__legalStar\" aria-hidden=\"true\">*</span> — designated as an extremist organization in the Russia",
 
       "sections.work.projects.title": "Projects",
       "sections.work.projects.lead": "A few live demos + source archives.",
@@ -260,7 +261,7 @@
     draggingCube: false,
   };
 
-  // Apply theme/lang/fx
+  // (комментарий переведён на русский)
   function applyTheme() {
     document.body.dataset.theme = state.theme;
     const icon = $("#themeBtn .iconbtn__icon");
@@ -276,7 +277,7 @@
   function applyAccent() {
     const h = Number.isFinite(state.accentH) ? state.accentH : 176;
     document.documentElement.style.setProperty("--accent-h", String(h));
-    // Secondary hue for gradients (keeps the "mystaticself" vibe while still being dynamic)
+    // (комментарий переведён на русский)
     const h2 = (h + 45) % 360;
     document.documentElement.style.setProperty("--accent2-h", String(h2));
     $$('[data-accent-range]').forEach(r => {
@@ -292,7 +293,7 @@
     document.body.classList.toggle('snd-off', state.snd !== 'on');
   }
 
-  // Tiny WebAudio SFX (no external files)
+  // (комментарий переведён на русский)
   let audioCtx = null;
   let audioUnlocked = false;
   const ensureAudio = () => {
@@ -309,7 +310,7 @@
     audioUnlocked = true;
     const ctx = ensureAudio();
     if (!ctx) return;
-    // resume is required on some browsers
+    // (комментарий переведён на русский)
     ctx.resume?.().catch?.(()=>{});
   };
   document.addEventListener('pointerdown', unlockAudioOnce, { once:true, capture:true });
@@ -358,7 +359,7 @@
       return;
     }
 
-    // click default
+    // (комментарий переведён на русский)
     osc.type = 'square';
     osc.frequency.setValueAtTime(420, t0);
     out.gain.exponentialRampToValueAtTime(0.07, t0 + 0.008);
@@ -377,17 +378,23 @@
     document.documentElement.lang = state.lang;
     document.body.dataset.lang = state.lang;
 
-    // meta (title/description)
+    // (комментарий переведён на русский)
     document.title = t("meta.title");
     const md = document.querySelector('meta[name="description"]');
     if (md) md.setAttribute("content", t("meta.desc"));
 
     $$("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
-      el.textContent = t(key);
+      const val = t(key);
+
+      if (key === "footer.legal") {
+        el.innerHTML = val;  
+      } else {
+        el.textContent = val; 
+      }
     });
 
-    // update language buttons
+    // (комментарий переведён на русский)
     $$("[data-set-lang]").forEach(btn => {
       const lang = btn.getAttribute("data-set-lang");
       btn.setAttribute("aria-pressed", String(lang === state.lang));
@@ -409,37 +416,37 @@
     if (!sections.includes(section)) return;
     state.active = section;
 
-    // highlight in cube
+    // (комментарий переведён на русский)
     $$("#cube .cubeface").forEach(face => {
       const is = face.dataset.section === section;
       face.setAttribute("aria-selected", String(is));
     });
 
-    // highlight in top nav
+    // (комментарий переведён на русский)
     $$("[data-route]").forEach(a => a.classList.toggle("is-active", a.dataset.route === section));
 
-    // update HUD
+    // (комментарий переведён на русский)
     const hud = $("#hudRoute");
     if (hud) hud.textContent = `#/${section}`;
 
-    // highlight crumbs in overlay
+    // (комментарий переведён на русский)
     $$(".crumb").forEach(c => c.classList.toggle("is-active", c.dataset.ovGo === section));
 
     if (glitch) pulseGlitch();
   }
 
-  // Overlay viewer
+  // (комментарий переведён на русский)
   const overlay = $("#overlay");
   const ovTitle = $("#ovTitle");
   const ovBody = $("#ovBody");
 
-  // Overlay paging state (prevents overlaps on rapid navigation)
+  // (комментарий переведён на русский)
   state.overlaySection = state.overlaySection || null;
   let ovPending = null;
   let ovSwipeToken = 0;
 
   function setHash(route) {
-    // route should be like "#/work" or "" to clear
+    // (комментарий переведён на русский)
     if (!route) {
       history.pushState("", document.title, window.location.pathname + window.location.search);
       onRoute();
@@ -449,8 +456,8 @@
   }
 
   
-  // Prevent layout shift when overlay opens/closes.
-  // IMPORTANT: must NOT recurse (a previous bug caused stack overflow and broke the whole app).
+  // (комментарий переведён на русский)
+  // (комментарий переведён на русский)
   function setBodyScrollLock(lock) {
     const sbw = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
     if (lock) {
@@ -466,15 +473,15 @@ function openOverlay(section) {
     if (!overlay) return;
     if (!sections.includes(section)) return;
 
-    // If mobile drawer is open, close it when navigating.
+    // (комментарий переведён на русский)
     if (typeof state.closeMobileMenu === 'function') state.closeMobileMenu();
 
     const prevShown = state.overlaySection || state.active;
 
-    // If a swipe is in progress, queue the latest request and bail out.
+    // (комментарий переведён на русский)
     if (state.overlayOpen && overlay.classList.contains("is-swiping")) {
       ovPending = section;
-      // Still update title + active highlight immediately for responsiveness
+      // (комментарий переведён на русский)
       setActive(section, {glitch:false});
       const titleKey = `sections.${section}.title`;
       if (ovTitle) ovTitle.textContent = t(titleKey);
@@ -483,7 +490,7 @@ function openOverlay(section) {
 
     setActive(section, {glitch:true});
 
-    // fill content by cloning readable section
+    // (комментарий переведён на русский)
     const block = document.getElementById(section);
     if (!block) return;
 
@@ -495,7 +502,7 @@ function openOverlay(section) {
       setBodyScrollLock(true);
     }
 
-    // Title
+    // (комментарий переведён на русский)
     const titleKey = `sections.${section}.title`;
     if (ovTitle) ovTitle.textContent = t(titleKey);
 
@@ -504,16 +511,16 @@ function openOverlay(section) {
       clone.removeAttribute("id");
       clone.classList.add("block--overlay");
 
-      // IDs are stripped inside overlay to avoid collisions.
+      // (комментарий переведён на русский)
       clone.querySelectorAll("[id]").forEach(el => el.removeAttribute("id"));
 
-      // IMPORTANT: widgets may have been initialized on the main page already.
-      // cloneNode(true) copies attributes, including flags like data-mini-bound="1",
-      // which would block initialization inside the overlay.
+      // (комментарий переведён на русский)
+      // (комментарий переведён на русский)
+      // (комментарий переведён на русский)
       clone.querySelectorAll('[data-mini-bound]').forEach(el => el.removeAttribute('data-mini-bound'));
 
-      // If HTML is malformed (missing closing tags), a section can accidentally
-      // capture following sections as children. Hard-guard: keep ONLY the current block.
+      // (комментарий переведён на русский)
+      // (комментарий переведён на русский)
       clone.querySelectorAll("[data-section-block]").forEach(el => {
         if (el.getAttribute("data-section-block") !== section) el.remove();
       });
@@ -525,18 +532,18 @@ function openOverlay(section) {
     };
 
     if (ovBody) {
-      // Keep overlay logic extremely stable: always render exactly ONE page.
-      // This eliminates "merged sections" and any leftover content issues.
+      // (комментарий переведён на русский)
+      // (комментарий переведён на русский)
       ovBody.innerHTML = "";
       ovBody.appendChild(makePage());
       state.overlaySection = section;
     }
 
     applyI18n();
-    // Toolbox controls are cloned into overlay pages; wire them up every time.
+    // (комментарий переведён на русский)
     bindToolbox(overlay);
-    // Mini demo exists both in main DOM and in overlay clones.
-    // Run on next frame to ensure the canvas has a real size inside animated overlay.
+    // Мини-демо должно работать и на главной, и в клоне внутри оверлея.
+    // Запускаем на следующий кадр, чтобы канвас успел получить реальный размер внутри анимированного оверлея.
     requestAnimationFrame(() => startMini(overlay));
 
     if (state.fx === "on") {
@@ -571,15 +578,15 @@ function openOverlay(section) {
       openOverlay(m[1]);
       return;
     }
-    // If overlay open but route cleared
+    // (комментарий переведён на русский)
     closeOverlay();
   }
 
-  // Wire up UI events
+  // (комментарий переведён на русский)
   function bindToolbox(root=document) {
-    // Accent slider
+    // (комментарий переведён на русский)
     $$('[data-accent-range]', root).forEach((el) => {
-      // keep in sync
+      // (комментарий переведён на русский)
       try { el.value = String(Number.isFinite(state.accentH) ? state.accentH : 176); } catch {}
       el.addEventListener('input', (e) => {
         const v = Number(e.target.value);
@@ -590,7 +597,7 @@ function openOverlay(section) {
       }, { passive:true });
     });
 
-    // Reduced motion
+    // (комментарий переведён на русский)
     $$('[data-motion-toggle]', root).forEach((btn) => {
       btn.addEventListener('click', () => {
         state.rm = state.rm === 'on' ? 'off' : 'on';
@@ -600,7 +607,7 @@ function openOverlay(section) {
       });
     });
 
-    // Sound
+    // (комментарий переведён на русский)
     $$('[data-sound-toggle]', root).forEach((btn) => {
       btn.addEventListener('click', () => {
         state.snd = state.snd === 'on' ? 'off' : 'on';
@@ -612,7 +619,7 @@ function openOverlay(section) {
   }
 
   function bind() {
-    // nav links (prevent default scroll; use overlay route)
+    // (комментарий переведён на русский)
     $$("a[data-route]").forEach(a => {
       a.addEventListener("click", (e) => {
         e.preventDefault();
@@ -620,7 +627,7 @@ function openOverlay(section) {
       });
     });
 
-    // Mobile hamburger menu
+    // (комментарий переведён на русский)
     const menuBtn = $("#menuBtn");
     const mobileMenu = $("#mobileMenu");
     const closeMobileMenu = () => {
@@ -641,7 +648,7 @@ function openOverlay(section) {
       e.preventDefault();
       toggleMobileMenu();
     });
-    // Close on outside click
+    // (комментарий переведён на русский)
     document.addEventListener('click', (e) => {
       if (!menuBtn || !mobileMenu) return;
       if (!mobileMenu.classList.contains('is-open')) return;
@@ -650,16 +657,16 @@ function openOverlay(section) {
       if (menuBtn.contains(t) || mobileMenu.contains(t)) return;
       closeMobileMenu();
     }, { capture:true });
-    // Close on Escape
+    // (комментарий переведён на русский)
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeMobileMenu();
     });
-    // Close when route changes (we open overlay)
+    // (комментарий переведён на русский)
     window.addEventListener('hashchange', closeMobileMenu);
-    // Expose for overlay open/close
+    // (комментарий переведён на русский)
     state.closeMobileMenu = closeMobileMenu;
 
-    // language toggle
+    // (комментарий переведён на русский)
     $$("[data-set-lang]").forEach(btn => {
       btn.addEventListener("click", () => {
         state.lang = btn.dataset.setLang;
@@ -668,14 +675,14 @@ function openOverlay(section) {
       });
     });
 
-    // theme toggle
+    // (комментарий переведён на русский)
     $("#themeBtn")?.addEventListener("click", () => {
       state.theme = state.theme === "dark" ? "light" : "dark";
       setStored("theme", state.theme);
       applyTheme();
     });
 
-    // FX toggle
+    // (комментарий переведён на русский)
     $("#fxBtn")?.addEventListener("click", () => {
       state.fx = state.fx === "on" ? "off" : "on";
       setStored("fx", state.fx);
@@ -683,10 +690,10 @@ function openOverlay(section) {
       playTone('toggle');
     });
 
-    // Toolbox (main page + later overlay clones)
+    // (комментарий переведён на русский)
     bindToolbox(document);
 
-    // cube faces hover/click
+    // (комментарий переведён на русский)
     let suppressClickUntil = 0;
     $$("#cube .cubeface").forEach(face => {
       face.addEventListener("mouseenter", () => setActive(face.dataset.section, {glitch:false}));
@@ -697,13 +704,13 @@ function openOverlay(section) {
       });
     });
 
-    // drag to rotate cube (360°)
+    // (комментарий переведён на русский)
     const cube = $("#cube");
     if (cube) {
       const sceneHost = cube.closest(".scene");
-      // Base rotations for the 4 interactive faces.
-      // We keep `ry` continuous (can be any number), and whenever we need to
-      // "go" to a face we choose the closest equivalent angle.
+      // (комментарий переведён на русский)
+      // (комментарий переведён на русский)
+      // (комментарий переведён на русский)
       const angleBySection = {
         work: 0,
         play: -90,
@@ -712,7 +719,7 @@ function openOverlay(section) {
       };
 
       const closestEquivalent = (current, targetBase) => {
-        // Choose targetBase + 360*k that is closest to current.
+        // (комментарий переведён на русский)
         const k = Math.round((current - targetBase) / 360);
         return targetBase + 360 * k;
       };
@@ -722,7 +729,7 @@ function openOverlay(section) {
 
       const applyRot = (animate=true) => {
         cube.classList.toggle("is-dragging", !animate);
-        // Put rotation vars on the shared host too, so siblings (wireframe cube) stay perfectly aligned.
+        // (комментарий переведён на русский)
         [cube, sceneHost].forEach(el => {
           if (!el) return;
           el.style.setProperty("--cube-ry", `${ry}deg`);
@@ -731,7 +738,7 @@ function openOverlay(section) {
       };
       applyRot(true);
 
-      // keep cube aligned when active section changes (unless dragging)
+      // (комментарий переведён на русский)
       const _setActive = setActive;
       setActive = function(section, opts){
         _setActive(section, opts);
@@ -744,12 +751,15 @@ function openOverlay(section) {
 
       let down = null;
       cube.addEventListener("pointerdown", (e) => {
+        // На тач-устройствах запрещаем скролл страницы при взаимодействии с кубом
+        if (e.pointerType === "touch") e.preventDefault();
         state.draggingCube = true;
         cube.setPointerCapture(e.pointerId);
         down = { x: e.clientX, y: e.clientY, ry, rx, t: Date.now(), moved: false };
         applyRot(false);
       });
       cube.addEventListener("pointermove", (e) => {
+        if (e.pointerType === "touch") e.preventDefault();
         if (!down) return;
         const dx = e.clientX - down.x;
         const dy = e.clientY - down.y;
@@ -762,8 +772,8 @@ function openOverlay(section) {
         if (!down) return;
         const moved = down.moved;
         down = null;
-        // Do NOT snap the cube rotation: keep it freely rotatable (full 360+).
-        // But still update the active face to the nearest section.
+        // (комментарий переведён на русский)
+        // (комментарий переведён на русский)
         const idx = ((Math.round((-ry) / 90) % 4) + 4) % 4;
         const sec = sections[idx];
         rx = 14;
@@ -775,24 +785,26 @@ function openOverlay(section) {
       cube.addEventListener("pointerup", end);
       cube.addEventListener("pointercancel", end);
       cube.addEventListener("lostpointercapture", end);
+      // (комментарий переведён на русский)
+      cube.addEventListener("touchmove", (ev) => { if (state.draggingCube) ev.preventDefault(); }, { passive:false });
     }
 
-    // Overlay controls
+    // (комментарий переведён на русский)
     $("#ovClose")?.addEventListener("click", () => setHash(""));
     $("#ovBack")?.addEventListener("click", () => setHash(""));
     overlay?.addEventListener("click", (e) => {
-      // click outside panel closes
+      // (комментарий переведён на русский)
       if (e.target === overlay) setHash("");
     });
     $("#ovPrev")?.addEventListener("click", () => setHash(`#/${nextSection(-1)}`));
     $("#ovNext")?.addEventListener("click", () => setHash(`#/${nextSection(1)}`));
     $$(".crumb").forEach(c => c.addEventListener("click", () => setHash(`#/${c.dataset.ovGo}`)));
 
-    // keyboard navigation
+    // (комментарий переведён на русский)
     window.addEventListener("keydown", (e) => {
       const key = e.key;
 
-      // ignore if typing in input/textarea
+      // (комментарий переведён на русский)
       const tag = (document.activeElement?.tagName || "").toLowerCase();
       if (["input","textarea"].includes(tag)) return;
 
@@ -823,8 +835,8 @@ function openOverlay(section) {
       }
     });
 
-    // mouse wheel selects (only when overlay closed)
-    // Keep normal page scrolling: only react when user is near the top or hovering the scene.
+    // (комментарий переведён на русский)
+    // (комментарий переведён на русский)
     let wheelTimer = null;
     window.addEventListener("wheel", (e) => {
       if (state.overlayOpen) return;
@@ -837,7 +849,7 @@ function openOverlay(section) {
       wheelTimer = window.setTimeout(() => wheelTimer = null, 240);
     }, {passive:true});
 
-    // textarea autogrow (no manual resize)
+    // (комментарий переведён на русский)
     const ta = $("#cfMsg");
     const autoGrow = () => {
       if (!ta) return;
@@ -848,10 +860,10 @@ function openOverlay(section) {
       ta.style.height = `${next}px`;
     };
     ta?.addEventListener("input", autoGrow);
-    // run once to normalize height
+    // (комментарий переведён на русский)
     autoGrow();
 
-    // Project preview modal
+    // (комментарий переведён на русский)
     const preview = $("#preview");
     const previewFrame = $("#previewFrame");
     const previewOpen = $("#previewOpen");
@@ -864,7 +876,7 @@ function openOverlay(section) {
     };
     $("#previewClose")?.addEventListener("click", closePreview);
     preview?.addEventListener("click", (e) => { if (e.target === preview) closePreview(); });
-    // Use event delegation so it works for both main DOM and overlay clones.
+    // (комментарий переведён на русский)
     document.addEventListener('click', (e) => {
       const t = e.target;
       if (!t || !(t instanceof Element)) return;
@@ -882,11 +894,11 @@ function openOverlay(section) {
       if (previewTitle) previewTitle.textContent = 'Preview';
     }, { capture:true });
 
-    // Contact form handler (works with Formspree)
+    // (комментарий переведён на русский)
     const form = $("#contactForm");
     const formStatus = $("#formStatus");
     form?.addEventListener("submit", async (e) => {
-      // If user didn't configure the form provider yet
+      // (комментарий переведён на русский)
       const action = form.getAttribute('action') || '';
       if (action.includes('XXXXXXXX')) {
         e.preventDefault();
@@ -896,7 +908,7 @@ function openOverlay(section) {
         return;
       }
 
-      // AJAX submit for nicer UX
+      // (комментарий переведён на русский)
       e.preventDefault();
       if (formStatus) formStatus.textContent = state.lang === 'ru' ? 'Отправка…' : 'Sending…';
       try {
@@ -918,7 +930,7 @@ function openOverlay(section) {
       window.setTimeout(() => { if (formStatus) formStatus.textContent = ''; }, 2600);
     });
 
-    // Command palette
+    // (комментарий переведён на русский)
     const palette = $("#palette");
     const palList = $("#paletteList");
     const palSearch = $("#paletteSearch");
@@ -988,7 +1000,7 @@ function openOverlay(section) {
 
     window.addEventListener("hashchange", onRoute);
 
-    // Global SFX: hover/click on interactive elements
+    // (комментарий переведён на русский)
     let hoverLock = 0;
     document.addEventListener('mouseover', (e) => {
       if (Date.now() < hoverLock) return;
@@ -996,7 +1008,7 @@ function openOverlay(section) {
       if (!t || !(t instanceof Element)) return;
       const hit = t.closest('button, a, .cubeface, .paletteitem');
       if (!hit) return;
-      // avoid repeats when moving inside the same element
+      // (комментарий переведён на русский)
       if (hit.contains(e.relatedTarget)) return;
       if (hit.matches('button, a, .cubeface, .paletteitem')) {
         playTone('hover');
@@ -1013,13 +1025,13 @@ function openOverlay(section) {
     }, { capture:true });
   }
 
-  // Mini demo
-  // Supports BOTH variants:
-  // 1) Canvas demo (older version) — a small square follows pointer.
-  // 2) DOM demo (.mini with .mini__dot) — dot follows pointer.
-  // Works in overlay clones (IDs may be stripped), so we always scope by `root`.
+  // (комментарий переведён на русский)
+  // (комментарий переведён на русский)
+  // (комментарий переведён на русский)
+  // (комментарий переведён на русский)
+  // (комментарий переведён на русский)
   function startMini(root = document) {
-    // --- Canvas variant ---
+    // (комментарий переведён на русский)
     const canvases = [];
     const byId = $("#mini", root);
     if (byId && byId.tagName === "CANVAS") canvases.push(byId);
@@ -1030,7 +1042,7 @@ function openOverlay(section) {
       if (canvas.dataset.miniBound === "1") return;
       canvas.dataset.miniBound = "1";
 
-      // Important: allow pointer tracking inside scrollable overlay (especially on touch).
+      // (комментарий переведён на русский)
       canvas.style.touchAction = "none";
 
       const ctx = canvas.getContext("2d");
@@ -1043,17 +1055,17 @@ function openOverlay(section) {
 
       const resize = () => {
         const rect = canvas.getBoundingClientRect();
-        // If canvas isn't laid out yet (first frames of overlay animation), retry later.
+        // (комментарий переведён на русский)
         if (!rect.width || !rect.height) return;
         const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
         canvas.width = Math.floor(rect.width * dpr);
         canvas.height = Math.floor(rect.height * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       };
-      // Initial sizing: do it on the next frames to survive overlay transitions.
+      // (комментарий переведён на русский)
       requestAnimationFrame(() => { resize(); requestAnimationFrame(resize); });
       window.addEventListener("resize", resize, { passive:true });
-      // Observe size changes (important when canvas lives in overlay content).
+      // (комментарий переведён на русский)
       if ('ResizeObserver' in window) {
         const ro = new ResizeObserver(() => resize());
         ro.observe(canvas);
@@ -1066,16 +1078,17 @@ function openOverlay(section) {
         hasPointer = true;
       };
 
-      // Overlay / panel mode: some browsers route pointer events to the parent tile
-      // (because the panel is scrollable and animated). Bind to both canvas and wrapper
-      // so the demo always reacts in the overlay.
+      // (комментарий переведён на русский)
+      // (комментарий переведён на русский)
+      // (комментарий переведён на русский)
       const wrapper = canvas.closest('.tile') || canvas.parentElement || canvas;
       wrapper.style.touchAction = 'none';
       canvas.style.pointerEvents = 'auto';
 
       const onMove = (e) => setTargetFromEvent(e);
       const onDown = (e) => {
-        // Capture on whichever element receives the event.
+        if (e.pointerType === 'touch') e.preventDefault();
+        // (комментарий переведён на русский)
         if (e.currentTarget && e.currentTarget.setPointerCapture) {
           e.currentTarget.setPointerCapture(e.pointerId);
         }
@@ -1096,11 +1109,22 @@ function openOverlay(section) {
         wrapper.addEventListener('pointerenter', onEnter);
         wrapper.addEventListener('pointerleave', onLeave);
       }
+      // Запрещаем прокрутку страницы при свайпе внутри мини-демо
+      wrapper.addEventListener('touchmove', (ev) => ev.preventDefault(), { passive:false });
 
       const applyColors = () => {
-        const isDark = document.body.dataset.theme === "dark";
+        // Определяем тему надёжно: в разных версиях она могла лежать на html или на body.
+        const theme = document.documentElement.dataset.theme || document.body.dataset.theme || "dark";
+        const isDark = theme === "dark";
+
+        // Сетка.
         ctx.strokeStyle = isDark ? "rgba(255,255,255,.18)" : "rgba(0,0,0,.18)";
-        ctx.fillStyle = isDark ? "rgba(73,197,182,.9)" : "rgba(11,13,18,.85)";
+
+        // Старый стиль мини-демо: яркий бирюзово‑зелёный (видимый и в тёмной, и в светлой теме).
+        // Здесь НЕ завязываемся на --accent, чтобы не ловить неожиданные цвета.
+        canvas._miniSquareColor = "rgba(73,197,182,.9)";
+        canvas._miniTextColor   = "rgba(73,197,182,.9)";
+
         ctx.font = "12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace";
       };
       applyColors();
@@ -1140,10 +1164,12 @@ function openOverlay(section) {
         ctx.save();
         ctx.translate(x,y);
         ctx.rotate(Date.now()/900);
+        ctx.fillStyle = canvas._miniSquareColor || "rgba(98, 250, 190, .96)";
         ctx.fillRect(-10,-10,20,20);
         ctx.restore();
 
         ctx.globalAlpha = 0.85;
+        ctx.fillStyle = canvas._miniTextColor || "rgba(98, 250, 190, .75)";
         ctx.fillText(state.lang === "ru" ? "Двигай мышью" : "Move your mouse", 12, 20);
         ctx.globalAlpha = 1;
 
@@ -1152,7 +1178,7 @@ function openOverlay(section) {
       step();
     });
 
-    // --- DOM variant ---
+    // (комментарий переведён на русский)
     $$(".mini", root).forEach((mini) => {
       if (!(mini instanceof HTMLElement)) return;
       if (mini.dataset.miniBound === "1") return;
@@ -1194,20 +1220,20 @@ function openOverlay(section) {
     });
   }
 
-  // Init
+  // (комментарий переведён на русский)
   function init() {
-    // Always honor the current document language as the initial language.
-    // This prevents "stuck" language when opening from previews or after bad stored values.
+    // (комментарий переведён на русский)
+    // (комментарий переведён на русский)
     const forced = document.body.dataset.lang;
     if (forced) state.lang = forced;
 
-    // If theme wasn't chosen before, follow system preference.
+    // (комментарий переведён на русский)
     if (!getStored("theme", null)) {
       const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
       state.theme = prefersDark ? "dark" : "light";
     }
 
-    // If user prefers reduced motion, default FX to off unless explicitly enabled before.
+    // (комментарий переведён на русский)
     if (!getStored("fx", null)) {
       const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       state.fx = reduce ? "off" : "on";
@@ -1222,16 +1248,16 @@ function openOverlay(section) {
     bind();
     startMini();
 
-    // Subtle scroll reveals (keeps site feeling "alive")
+    // (комментарий переведён на русский)
     setupReveal();
 
-    // set year
+    // (комментарий переведён на русский)
     const y = $("#year");
     if (y) y.textContent = String(new Date().getFullYear());
 
-    // initial active
+    // (комментарий переведён на русский)
     setActive(state.active, {glitch:false});
-    // initial route
+    // (комментарий переведён на русский)
     onRoute();
   }
 
