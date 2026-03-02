@@ -10,7 +10,7 @@
   --shadow: rgba(0,0,0,.55);
   --accent-h: 176;
   --accent2-h: 221;
-  --accent: hsl(var(--accent-h) 60% 55%); /* inspired by MY/STATIC/SELF palette */
+  --accent: hsl(var(--accent-h) 60% 55%); 
   --accent2: hsl(var(--accent2-h) 70% 60%);
   --good: #7CFFB2;
   --radius: 18px;

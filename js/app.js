@@ -8,7 +8,7 @@
     const found = $$("[data-section-block]").map(el => el.getAttribute("data-section-block")).filter(Boolean);
     const uniq = Array.from(new Set(found));
     const ordered = defaultSectionsOrder.filter(k => uniq.includes(k));
-    // (комментарий переведён на русский)
+
     for (const k of uniq) if (!ordered.includes(k)) ordered.push(k);
     return ordered;
   })();
@@ -74,7 +74,6 @@
       "sections.pay.process.desc": "После согласования объёма и сроков пришлю счёт или ссылку на оплату. После оплаты подтвержу и отправлю короткое сообщение/чек.",
 
       "sections.connect.links.title": "Ссылки",
-      "sections.connect.note": "Замените эти ссылки на реальные прямо в HTML.",
       "sections.connect.copy.title": "Быстрое сообщение",
       "sections.connect.copy.desc": "Клик — и короткий шаблон сообщения копируется.",
       "sections.connect.copy.btn": "Скопировать текст",
@@ -108,8 +107,6 @@
       "toolbox.hint": "Подсказка: Ctrl+K — палитра команд.",
 
       "sections.connect.form.title": "Написать мне",
-      "sections.connect.form.desc": "Форма работает на статическом хостинге через сервис форм.",
-      "sections.connect.form.tip": "Замените XXXXXXXX на id формы Formspree (инструкция в README).",
       "form.name": "Имя",
       "form.email": "Почта",
       "form.msg": "Сообщение",
@@ -221,8 +218,6 @@
       "toolbox.hint": "Tip: press Ctrl+K to open the command palette.",
 
       "sections.connect.form.title": "Message me",
-      "sections.connect.form.desc": "This form works on static hosting via a form provider.",
-      "sections.connect.form.tip": "Replace XXXXXXXX with your Formspree form id (instructions in README).",
       "form.name": "Name",
       "form.email": "Email",
       "form.msg": "Message",
@@ -277,7 +272,7 @@
   function applyAccent() {
     const h = Number.isFinite(state.accentH) ? state.accentH : 176;
     document.documentElement.style.setProperty("--accent-h", String(h));
-    // (комментарий переведён на русский)
+
     const h2 = (h + 45) % 360;
     document.documentElement.style.setProperty("--accent2-h", String(h2));
     $$('[data-accent-range]').forEach(r => {
@@ -310,7 +305,7 @@
     audioUnlocked = true;
     const ctx = ensureAudio();
     if (!ctx) return;
-    // (комментарий переведён на русский)
+
     ctx.resume?.().catch?.(()=>{});
   };
   document.addEventListener('pointerdown', unlockAudioOnce, { once:true, capture:true });
@@ -359,7 +354,7 @@
       return;
     }
 
-    // (комментарий переведён на русский)
+
     osc.type = 'square';
     osc.frequency.setValueAtTime(420, t0);
     out.gain.exponentialRampToValueAtTime(0.07, t0 + 0.008);
@@ -378,7 +373,7 @@
     document.documentElement.lang = state.lang;
     document.body.dataset.lang = state.lang;
 
-    // (комментарий переведён на русский)
+
     document.title = t("meta.title");
     const md = document.querySelector('meta[name="description"]');
     if (md) md.setAttribute("content", t("meta.desc"));
@@ -394,7 +389,7 @@
       }
     });
 
-    // (комментарий переведён на русский)
+
     $$("[data-set-lang]").forEach(btn => {
       const lang = btn.getAttribute("data-set-lang");
       btn.setAttribute("aria-pressed", String(lang === state.lang));
@@ -416,20 +411,20 @@
     if (!sections.includes(section)) return;
     state.active = section;
 
-    // (комментарий переведён на русский)
+
     $$("#cube .cubeface").forEach(face => {
       const is = face.dataset.section === section;
       face.setAttribute("aria-selected", String(is));
     });
 
-    // (комментарий переведён на русский)
+
     $$("[data-route]").forEach(a => a.classList.toggle("is-active", a.dataset.route === section));
 
-    // (комментарий переведён на русский)
+
     const hud = $("#hudRoute");
     if (hud) hud.textContent = `#/${section}`;
 
-    // (комментарий переведён на русский)
+
     $$(".crumb").forEach(c => c.classList.toggle("is-active", c.dataset.ovGo === section));
 
     if (glitch) pulseGlitch();
@@ -446,7 +441,7 @@
   let ovSwipeToken = 0;
 
   function setHash(route) {
-    // (комментарий переведён на русский)
+
     if (!route) {
       history.pushState("", document.title, window.location.pathname + window.location.search);
       onRoute();
@@ -473,15 +468,15 @@ function openOverlay(section) {
     if (!overlay) return;
     if (!sections.includes(section)) return;
 
-    // (комментарий переведён на русский)
+
     if (typeof state.closeMobileMenu === 'function') state.closeMobileMenu();
 
     const prevShown = state.overlaySection || state.active;
 
-    // (комментарий переведён на русский)
+
     if (state.overlayOpen && overlay.classList.contains("is-swiping")) {
       ovPending = section;
-      // (комментарий переведён на русский)
+  
       setActive(section, {glitch:false});
       const titleKey = `sections.${section}.title`;
       if (ovTitle) ovTitle.textContent = t(titleKey);
@@ -490,7 +485,7 @@ function openOverlay(section) {
 
     setActive(section, {glitch:true});
 
-    // (комментарий переведён на русский)
+
     const block = document.getElementById(section);
     if (!block) return;
 
@@ -502,7 +497,7 @@ function openOverlay(section) {
       setBodyScrollLock(true);
     }
 
-    // (комментарий переведён на русский)
+
     const titleKey = `sections.${section}.title`;
     if (ovTitle) ovTitle.textContent = t(titleKey);
 
@@ -511,16 +506,16 @@ function openOverlay(section) {
       clone.removeAttribute("id");
       clone.classList.add("block--overlay");
 
-      // (комментарий переведён на русский)
+  
       clone.querySelectorAll("[id]").forEach(el => el.removeAttribute("id"));
 
-      // (комментарий переведён на русский)
-      // (комментарий переведён на русский)
-      // (комментарий переведён на русский)
+  
+  
+  
       clone.querySelectorAll('[data-mini-bound]').forEach(el => el.removeAttribute('data-mini-bound'));
 
-      // (комментарий переведён на русский)
-      // (комментарий переведён на русский)
+  
+  
       clone.querySelectorAll("[data-section-block]").forEach(el => {
         if (el.getAttribute("data-section-block") !== section) el.remove();
       });
@@ -532,15 +527,15 @@ function openOverlay(section) {
     };
 
     if (ovBody) {
-      // (комментарий переведён на русский)
-      // (комментарий переведён на русский)
+  
+  
       ovBody.innerHTML = "";
       ovBody.appendChild(makePage());
       state.overlaySection = section;
     }
 
     applyI18n();
-    // (комментарий переведён на русский)
+
     bindToolbox(overlay);
     // Мини-демо должно работать и на главной, и в клоне внутри оверлея.
     // Запускаем на следующий кадр, чтобы канвас успел получить реальный размер внутри анимированного оверлея.
@@ -578,15 +573,15 @@ function openOverlay(section) {
       openOverlay(m[1]);
       return;
     }
-    // (комментарий переведён на русский)
+
     closeOverlay();
   }
 
   // (комментарий переведён на русский)
   function bindToolbox(root=document) {
-    // (комментарий переведён на русский)
+
     $$('[data-accent-range]', root).forEach((el) => {
-      // (комментарий переведён на русский)
+  
       try { el.value = String(Number.isFinite(state.accentH) ? state.accentH : 176); } catch {}
       el.addEventListener('input', (e) => {
         const v = Number(e.target.value);
@@ -597,7 +592,7 @@ function openOverlay(section) {
       }, { passive:true });
     });
 
-    // (комментарий переведён на русский)
+
     $$('[data-motion-toggle]', root).forEach((btn) => {
       btn.addEventListener('click', () => {
         state.rm = state.rm === 'on' ? 'off' : 'on';
@@ -607,7 +602,7 @@ function openOverlay(section) {
       });
     });
 
-    // (комментарий переведён на русский)
+
     $$('[data-sound-toggle]', root).forEach((btn) => {
       btn.addEventListener('click', () => {
         state.snd = state.snd === 'on' ? 'off' : 'on';
@@ -619,7 +614,7 @@ function openOverlay(section) {
   }
 
   function bind() {
-    // (комментарий переведён на русский)
+
     $$("a[data-route]").forEach(a => {
       a.addEventListener("click", (e) => {
         e.preventDefault();
@@ -627,7 +622,7 @@ function openOverlay(section) {
       });
     });
 
-    // (комментарий переведён на русский)
+
     const menuBtn = $("#menuBtn");
     const mobileMenu = $("#mobileMenu");
     const closeMobileMenu = () => {
@@ -648,7 +643,7 @@ function openOverlay(section) {
       e.preventDefault();
       toggleMobileMenu();
     });
-    // (комментарий переведён на русский)
+
     document.addEventListener('click', (e) => {
       if (!menuBtn || !mobileMenu) return;
       if (!mobileMenu.classList.contains('is-open')) return;
@@ -657,16 +652,16 @@ function openOverlay(section) {
       if (menuBtn.contains(t) || mobileMenu.contains(t)) return;
       closeMobileMenu();
     }, { capture:true });
-    // (комментарий переведён на русский)
+
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeMobileMenu();
     });
-    // (комментарий переведён на русский)
+
     window.addEventListener('hashchange', closeMobileMenu);
-    // (комментарий переведён на русский)
+
     state.closeMobileMenu = closeMobileMenu;
 
-    // (комментарий переведён на русский)
+
     $$("[data-set-lang]").forEach(btn => {
       btn.addEventListener("click", () => {
         state.lang = btn.dataset.setLang;
@@ -675,14 +670,14 @@ function openOverlay(section) {
       });
     });
 
-    // (комментарий переведён на русский)
+
     $("#themeBtn")?.addEventListener("click", () => {
       state.theme = state.theme === "dark" ? "light" : "dark";
       setStored("theme", state.theme);
       applyTheme();
     });
 
-    // (комментарий переведён на русский)
+
     $("#fxBtn")?.addEventListener("click", () => {
       state.fx = state.fx === "on" ? "off" : "on";
       setStored("fx", state.fx);
@@ -690,10 +685,10 @@ function openOverlay(section) {
       playTone('toggle');
     });
 
-    // (комментарий переведён на русский)
+
     bindToolbox(document);
 
-    // (комментарий переведён на русский)
+
     let suppressClickUntil = 0;
     $$("#cube .cubeface").forEach(face => {
       face.addEventListener("mouseenter", () => setActive(face.dataset.section, {glitch:false}));
@@ -704,13 +699,13 @@ function openOverlay(section) {
       });
     });
 
-    // (комментарий переведён на русский)
+
     const cube = $("#cube");
     if (cube) {
       const sceneHost = cube.closest(".scene");
-      // (комментарий переведён на русский)
-      // (комментарий переведён на русский)
-      // (комментарий переведён на русский)
+  
+  
+  
       const angleBySection = {
         work: 0,
         play: -90,
@@ -719,7 +714,7 @@ function openOverlay(section) {
       };
 
       const closestEquivalent = (current, targetBase) => {
-        // (комментарий переведён на русский)
+    
         const k = Math.round((current - targetBase) / 360);
         return targetBase + 360 * k;
       };
@@ -729,7 +724,7 @@ function openOverlay(section) {
 
       const applyRot = (animate=true) => {
         cube.classList.toggle("is-dragging", !animate);
-        // (комментарий переведён на русский)
+    
         [cube, sceneHost].forEach(el => {
           if (!el) return;
           el.style.setProperty("--cube-ry", `${ry}deg`);
@@ -738,7 +733,7 @@ function openOverlay(section) {
       };
       applyRot(true);
 
-      // (комментарий переведён на русский)
+  
       const _setActive = setActive;
       setActive = function(section, opts){
         _setActive(section, opts);
@@ -772,8 +767,8 @@ function openOverlay(section) {
         if (!down) return;
         const moved = down.moved;
         down = null;
-        // (комментарий переведён на русский)
-        // (комментарий переведён на русский)
+    
+    
         const idx = ((Math.round((-ry) / 90) % 4) + 4) % 4;
         const sec = sections[idx];
         rx = 14;
@@ -785,26 +780,26 @@ function openOverlay(section) {
       cube.addEventListener("pointerup", end);
       cube.addEventListener("pointercancel", end);
       cube.addEventListener("lostpointercapture", end);
-      // (комментарий переведён на русский)
+  
       cube.addEventListener("touchmove", (ev) => { if (state.draggingCube) ev.preventDefault(); }, { passive:false });
     }
 
-    // (комментарий переведён на русский)
+
     $("#ovClose")?.addEventListener("click", () => setHash(""));
     $("#ovBack")?.addEventListener("click", () => setHash(""));
     overlay?.addEventListener("click", (e) => {
-      // (комментарий переведён на русский)
+  
       if (e.target === overlay) setHash("");
     });
     $("#ovPrev")?.addEventListener("click", () => setHash(`#/${nextSection(-1)}`));
     $("#ovNext")?.addEventListener("click", () => setHash(`#/${nextSection(1)}`));
     $$(".crumb").forEach(c => c.addEventListener("click", () => setHash(`#/${c.dataset.ovGo}`)));
 
-    // (комментарий переведён на русский)
+
     window.addEventListener("keydown", (e) => {
       const key = e.key;
 
-      // (комментарий переведён на русский)
+  
       const tag = (document.activeElement?.tagName || "").toLowerCase();
       if (["input","textarea"].includes(tag)) return;
 
@@ -835,8 +830,8 @@ function openOverlay(section) {
       }
     });
 
-    // (комментарий переведён на русский)
-    // (комментарий переведён на русский)
+
+
     let wheelTimer = null;
     window.addEventListener("wheel", (e) => {
       if (state.overlayOpen) return;
@@ -849,7 +844,7 @@ function openOverlay(section) {
       wheelTimer = window.setTimeout(() => wheelTimer = null, 240);
     }, {passive:true});
 
-    // (комментарий переведён на русский)
+
     const ta = $("#cfMsg");
     const autoGrow = () => {
       if (!ta) return;
@@ -860,10 +855,10 @@ function openOverlay(section) {
       ta.style.height = `${next}px`;
     };
     ta?.addEventListener("input", autoGrow);
-    // (комментарий переведён на русский)
+
     autoGrow();
 
-    // (комментарий переведён на русский)
+
     const preview = $("#preview");
     const previewFrame = $("#previewFrame");
     const previewOpen = $("#previewOpen");
@@ -876,7 +871,7 @@ function openOverlay(section) {
     };
     $("#previewClose")?.addEventListener("click", closePreview);
     preview?.addEventListener("click", (e) => { if (e.target === preview) closePreview(); });
-    // (комментарий переведён на русский)
+
     document.addEventListener('click', (e) => {
       const t = e.target;
       if (!t || !(t instanceof Element)) return;
@@ -894,11 +889,11 @@ function openOverlay(section) {
       if (previewTitle) previewTitle.textContent = 'Preview';
     }, { capture:true });
 
-    // (комментарий переведён на русский)
+
     const form = $("#contactForm");
     const formStatus = $("#formStatus");
     form?.addEventListener("submit", async (e) => {
-      // (комментарий переведён на русский)
+  
       const action = form.getAttribute('action') || '';
       if (action.includes('XXXXXXXX')) {
         e.preventDefault();
@@ -908,7 +903,7 @@ function openOverlay(section) {
         return;
       }
 
-      // (комментарий переведён на русский)
+  
       e.preventDefault();
       if (formStatus) formStatus.textContent = state.lang === 'ru' ? 'Отправка…' : 'Sending…';
       try {
@@ -930,7 +925,7 @@ function openOverlay(section) {
       window.setTimeout(() => { if (formStatus) formStatus.textContent = ''; }, 2600);
     });
 
-    // (комментарий переведён на русский)
+
     const palette = $("#palette");
     const palList = $("#paletteList");
     const palSearch = $("#paletteSearch");
@@ -1000,7 +995,7 @@ function openOverlay(section) {
 
     window.addEventListener("hashchange", onRoute);
 
-    // (комментарий переведён на русский)
+
     let hoverLock = 0;
     document.addEventListener('mouseover', (e) => {
       if (Date.now() < hoverLock) return;
@@ -1008,7 +1003,7 @@ function openOverlay(section) {
       if (!t || !(t instanceof Element)) return;
       const hit = t.closest('button, a, .cubeface, .paletteitem');
       if (!hit) return;
-      // (комментарий переведён на русский)
+  
       if (hit.contains(e.relatedTarget)) return;
       if (hit.matches('button, a, .cubeface, .paletteitem')) {
         playTone('hover');
@@ -1031,7 +1026,7 @@ function openOverlay(section) {
   // (комментарий переведён на русский)
   // (комментарий переведён на русский)
   function startMini(root = document) {
-    // (комментарий переведён на русский)
+
     const canvases = [];
     const byId = $("#mini", root);
     if (byId && byId.tagName === "CANVAS") canvases.push(byId);
@@ -1042,7 +1037,7 @@ function openOverlay(section) {
       if (canvas.dataset.miniBound === "1") return;
       canvas.dataset.miniBound = "1";
 
-      // (комментарий переведён на русский)
+  
       canvas.style.touchAction = "none";
 
       const ctx = canvas.getContext("2d");
@@ -1055,17 +1050,17 @@ function openOverlay(section) {
 
       const resize = () => {
         const rect = canvas.getBoundingClientRect();
-        // (комментарий переведён на русский)
+    
         if (!rect.width || !rect.height) return;
         const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
         canvas.width = Math.floor(rect.width * dpr);
         canvas.height = Math.floor(rect.height * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       };
-      // (комментарий переведён на русский)
+  
       requestAnimationFrame(() => { resize(); requestAnimationFrame(resize); });
       window.addEventListener("resize", resize, { passive:true });
-      // (комментарий переведён на русский)
+  
       if ('ResizeObserver' in window) {
         const ro = new ResizeObserver(() => resize());
         ro.observe(canvas);
@@ -1078,9 +1073,9 @@ function openOverlay(section) {
         hasPointer = true;
       };
 
-      // (комментарий переведён на русский)
-      // (комментарий переведён на русский)
-      // (комментарий переведён на русский)
+  
+  
+  
       const wrapper = canvas.closest('.tile') || canvas.parentElement || canvas;
       wrapper.style.touchAction = 'none';
       canvas.style.pointerEvents = 'auto';
@@ -1088,7 +1083,7 @@ function openOverlay(section) {
       const onMove = (e) => setTargetFromEvent(e);
       const onDown = (e) => {
         if (e.pointerType === 'touch') e.preventDefault();
-        // (комментарий переведён на русский)
+    
         if (e.currentTarget && e.currentTarget.setPointerCapture) {
           e.currentTarget.setPointerCapture(e.pointerId);
         }
@@ -1178,7 +1173,7 @@ function openOverlay(section) {
       step();
     });
 
-    // (комментарий переведён на русский)
+
     $$(".mini", root).forEach((mini) => {
       if (!(mini instanceof HTMLElement)) return;
       if (mini.dataset.miniBound === "1") return;
@@ -1222,18 +1217,18 @@ function openOverlay(section) {
 
   // (комментарий переведён на русский)
   function init() {
-    // (комментарий переведён на русский)
-    // (комментарий переведён на русский)
+
+
     const forced = document.body.dataset.lang;
     if (forced) state.lang = forced;
 
-    // (комментарий переведён на русский)
+
     if (!getStored("theme", null)) {
       const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
       state.theme = prefersDark ? "dark" : "light";
     }
 
-    // (комментарий переведён на русский)
+
     if (!getStored("fx", null)) {
       const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       state.fx = reduce ? "off" : "on";
@@ -1248,16 +1243,16 @@ function openOverlay(section) {
     bind();
     startMini();
 
-    // (комментарий переведён на русский)
+
     setupReveal();
 
-    // (комментарий переведён на русский)
+
     const y = $("#year");
     if (y) y.textContent = String(new Date().getFullYear());
 
-    // (комментарий переведён на русский)
+
     setActive(state.active, {glitch:false});
-    // (комментарий переведён на русский)
+
     onRoute();
   }
 
