@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Читалка</title>
+    <link rel="stylesheet" href="./fonts/fonts.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <main class="content">
+
+        <div class="content__wrap">
+            <div class="header">
+                <h1 class="header__chapter">Глава 1</h1>
+                <h2 class="header__title">Таинственная находка</h2>
+            </div>
+
+            <div class="content__text">
+                <p class="text">
+                    Приключение начинается обычным вечером в черте поселения по имени Маленький Икот, где Эрник Безриков
+                    —
+                    скромный
+                    и наивный местный кузнец, по несчастью обладал любопытством, превосходящим его благоразумие.
+                    Говорят, в
+                    своем
+                    беспокойном гении он был до того безрассуден, что нередко спрашивал, чем заняты звезды над нами. И
+                    вот
+                    однажды,
+                    после долгого дня работы, сидя у костра и глядя в изумрудное небо, он увидел самое любопытное
+                    зрелище
+                    своей
+                    жизни.
+                </p>
+                <p class="text">
+                    Падающая звезда уронила в его сад нечто сияющее и загадочное. Поначалу Эрник задумался, не продукт
+                    ли
+                    это его
+                    переутомленного воображения, но наутро он обнаружил странное устройство, покрытое символами, от
+                    которых
+                    голова
+                    идет кругом. Переминаясь с ноги на ногу, он посмотрел на него и подумал: "Пожалуй, в этот раз мое
+                    любопытство зашло
+                    слишком далеко".
+                </p>
+                <p class="text">
+                    Аппарат включился, и голос, исходивший из неизвестного устройства, предложил: "Готовы ли вы к
+                    путешествию, Эрник Безриков?" Он проглотил и ответил "Я... готов", удивляясь
+                    сноровке, которой он и сам не ожидал.
+                </p>
+                <p class="text">
+                    Аппарат подтвердил выбор и тут же заполонил кабину золотистым светом. Эрник ощутил странное ощущение
+                    его
+                    страха,
+                    скатывающегося в нежное волнение, а затем в несдерживаемое любопытство. Его ступни отчалили от земли
+                    его
+                    родного
+                    города, взлетев выше и выше, пока Икот не стал не более чем искоркой в огромной тьме космоса.
+                </p>
+                <p class="text">
+                    В этом стремительном путешествии Эрник видел звезды, близко и ярко, как никогда прежде. Он летел на
+                    скорости,
+                    скорее ощущаемой, чем видимой. Он видел миры, самое понятие о которых развергло бы мозг менее
+                    подготовленного
+                    путешественника на тысячи кусочков, как кирпич.
+                </p>
+                <p class="text">
+                    Каждый пейзаж в этом путешествии по звездам был как картина, которой он сначала любовался, затем
+                    проникал туда,
+                    где еще никто не бывал. С каждым очередным чудом он осознавал, насколько велик и неудержим этот
+                    Вселенский
+                    океан. Вокруг него вихрили звезды, планеты и галактики, заставляя его чувствовать себя ребенком,
+                    первым
+                    разом
+                    влюбленным в свою игрушку.
+                </p>
+                <p class="text">
+                    На протяжении всего этого, Эрник казался прозрачным и неподвижным, точно был именно таким.
+                    Астральные
+                    кинжалы,
+                    бесконечные пустоши космоса, всемогущие планеты. Они все превращались из гигантов в маленьких
+                    гномиков,
+                    а затем
+                    вновь в гигантов — все в руках трактовщика звезд, Эрника Безрикова.
+                </p>
+            </div>
+
+            <div class="content__footer">
+                <p class="pages">123 / 768</p>
+            </div>
+        </div>
+
+        <div class="content__settings">
+
+            <button class="settings__close" title="Закрыть настройки"></button>
+
+            <div class="settings">
+
+                <form class="settings__form">
+                    <h3 class="settings__label">Настройки</h3>
+                    <label class="label">
+                        Шрифт:
+                        <select class="settings__input settings__font-change">
+                            <option value="StratosSkyeng"selected>StratosSkyeng</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Fira Sans">Fira Sans</option>
+                        </select>
+                    </label>
+
+                    <label class="label">
+                        Размер:
+                        <input type="number" class="settings__font-size settings__input" value="16" min="10" max="26">
+                        px
+                    </label>
+
+                    <label class="label">
+                        Цвет:
+                        <input type="color" class="settings__font-color settings__input">
+                    </label>
+
+                    <label class="label">
+                        Интервал:
+                        <input type="range" class="settings__input settings__interval" min="1" max="3" step="0.1" value="1.5">
+                    </label>
+
+                    <div class="label label-back-color">
+                        Цвет фона:
+                        <label class="settings__background-color-label white">
+                            <input type="radio" class="settings__back-color" name="font-color" value="white" checked>
+                        </label>
+                        <label class="settings__background-color-label bisque">
+                            <input type="radio" class="settings__back-color" name="font-color" value="bisque">
+                        </label>
+                        <label class="settings__background-color-label grey">
+                            <input type="radio" class="settings__back-color" name="font-color" value="grey">
+                        </label>
+                        <label class="settings__background-color-label black">
+                            <input type="radio" class="settings__back-color" name="font-color" value="black">
+                        </label>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

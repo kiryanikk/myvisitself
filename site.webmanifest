@@ -1,0 +1,15 @@
+{
+  "name": "myvisitself",
+  "short_name": "myvisitself",
+  "start_url": "/en/",
+  "display": "standalone",
+  "background_color": "#081018",
+  "theme_color": "#081018",
+  "icons": [
+    {
+      "src": "/assets/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ]
+}
