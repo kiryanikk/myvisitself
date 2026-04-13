@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-Host: myvisitself.ru
-Sitemap: https://myvisitself.ru/sitemap.xml
